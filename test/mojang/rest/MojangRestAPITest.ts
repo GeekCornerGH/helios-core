@@ -26,8 +26,8 @@ describe('[Mojang Rest API] Errors', () => {
         const defStatusHack = MojangRestAPI['statuses']
 
         nock(MojangRestAPI.STATUS_ENDPOINT)
-            .get('/check')
-            .reply(500, 'Service temprarily offline.')
+            .get('/')
+            .reply(200)
 
         const res = await MojangRestAPI.status()
         expectFailure(res)
@@ -62,9 +62,9 @@ describe('[Mojang Rest API] Status', () => {
 
         const defStatusHack = MojangRestAPI['statuses']
 
-        nock(MojangRestAPI.STATUS_ENDPOINT)
-            .get('/check')
-            .reply(200, defStatusHack)
+        nock('https://aventiumsoftworks.github.io')
+            .get('/helios-status-page')
+            .reply(200)
 
         const res = await MojangRestAPI.status()
         expectSuccess(res)
